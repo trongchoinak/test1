@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using test1.Models;
 using test1.Services;
 
@@ -6,6 +7,7 @@ namespace test1.Controllers
 {
         [ApiController]
         [Route("api/[controller]")]
+    [Authorize]    
         public class BookController : ControllerBase
         {
             private readonly ILibraryService _libraryService;

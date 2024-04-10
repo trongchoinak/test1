@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using test1.Models;
 using test1.Services;
 
@@ -16,6 +17,7 @@ namespace test1.Controllers
             }
 
             [HttpGet]
+        [Authorize(Roles ="Read,Write")]    
             public async Task<IActionResult> GetAuthors()
             {
                 var authors = await _libraryService.GetAuthorsAsync();
@@ -29,7 +31,8 @@ namespace test1.Controllers
             }
 
             [HttpGet("id")]
-            public async Task<IActionResult> GetAuthor(Guid id, bool includeBooks = false)
+        [Authorize(Roles = "Read,Write")]
+        public async Task<IActionResult> GetAuthor(Guid id, bool includeBooks = false)
             {
                 Author author = await _libraryService.GetAuthorAsync(id, includeBooks);
 
